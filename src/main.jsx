@@ -7,7 +7,7 @@ import { CartProvider } from "./state/CartContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/purecart">
       <CartProvider>
         <App />
       </CartProvider>
