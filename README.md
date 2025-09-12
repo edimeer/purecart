@@ -1,13 +1,44 @@
-# React + Vite
+# 🛒 PureCart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PureCart is a modern e-commerce web app built with **React, Vite, and Tailwind CSS**.  
+It features a clean orange-themed design with product browsing, a dynamic shopping cart, and a simple checkout flow — all optimized for speed and responsiveness.
 
-Currently, two official plugins are available:
+![Screenshot 2025-09-12 at 11 23 15 PM](https://github.com/user-attachments/assets/9d700feb-f5e2-44b0-aaa0-2faf90887277)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# purecart
+- 🎨 Responsive UI built with Tailwind CSS (orange color palette)  
+- 📦 Product catalog with filtering and sorting  
+- 🛍️ Interactive cart drawer with add, remove, and quantity updates  
+- 💳 Checkout flow with order summary  
+- ⚡ Powered by Vite for blazing-fast builds and HMR  
+- 🌐 Deployable on GitHub Pages  
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+  ```bash
+  git clone https://github.com/edimeer/purecart.git
+  cd purecart
+  ```
+### 2.	Install dependencies
+   ```bash
+   npm install
+   ```
+### 3. Run development server
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:5173 in your browser.
+
+🛠️ Tech Stack
+	•	React
+	•	Vite
+	•	Tailwind CSS
+	•	React Router
+
+ ### Access the PureCart here: https://edimeer.github.io/purecart/
