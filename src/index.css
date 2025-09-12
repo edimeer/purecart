@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand helpers */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-medium transition;
+}
+
+.btn-brand {
+  @apply bg-brand-600 text-white hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500 shadow-brand;
+}
+
+.btn-ghost {
+  @apply text-brand-700 hover:bg-brand-50 hover:text-brand-800;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full bg-brand-100 text-brand-700 px-2 py-0.5 text-xs;
+}
+
+.card {
+  @apply rounded-xl bg-white shadow-sm ring-1 ring-black/5;
+}
+
+.input {
+  @apply block w-full rounded-md border-gray-300 focus:border-brand-500 focus:ring-brand-500;
+}
