@@ -7,32 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: "#FFF7ED",
-          100: "#FFEDD5",
-          200: "#FED7AA",
-          300: "#FDBA74",
-          400: "#FB923C",
-          500: "#F97316",
-          600: "#EA580C",
-          700: "#C2410C",
-          800: "#9A3412",
-          900: "#7C2D12",
-          950: "#431407",
-        },
+        paper: "#F3F5E6",
+        leaf: "#14301F",
+        tangerine: "#F25C14",
+        lemon: "#F5D63D",
+        pith: "#E1E7C8",
+        muted: "#4A5D4F",
       },
       fontFamily: {
         display: [
+          "Bricolage Grotesque",
           "ui-sans-serif",
           "system-ui",
-          "Segoe UI",
-          "Roboto",
-          "Arial",
           "sans-serif",
         ],
-      },
-      boxShadow: {
-        brand: "0 10px 20px -10px rgba(249,115,22,0.35)",
+        sans: ["Hanken Grotesk", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },

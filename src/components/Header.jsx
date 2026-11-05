@@ -1,40 +1,47 @@
 import { Link, NavLink } from "react-router-dom";
 import { useCart } from "../state/CartContext.jsx";
+import { currency } from "../utils/format.js";
 
 export default function Header() {
-  const { items, ui, openCart, toggleCart, totals } = useCart();
+  const { items, ui, toggleCart, totals } = useCart();
   const count = items.reduce((n, it) => n + it.qty, 0);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-orange-100">
+    <header className="sticky top-0 z-40 border-b border-leaf/15 bg-paper/90 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 grid place-items-center text-white font-bold shadow-brand">P</div>
-            <span className="text-xl font-bold text-brand-700 tracking-tight">PureCart</span>
+          <Link to="/" className="flex items-center gap-2.5">
+            <span className="h-7 w-7 rounded-full bg-tangerine ring-4 ring-lemon" aria-hidden="true" />
+            <span className="font-display text-2xl font-extrabold tracking-tight">PureCart</span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
-            <NavLink className={({isActive}) => `text-sm ${isActive ? 'text-brand-700 font-semibold' : 'text-gray-600 hover:text-brand-700'}`} to="/catalog">Catalog</NavLink>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <button
-              aria-label={ui.isCartOpen ? "Close cart" : "Open cart"}
-              onClick={toggleCart}
-              className="relative btn btn-ghost"
+          <nav className="flex items-center gap-4 sm:gap-6">
+            <NavLink
+              to="/catalog"
+              className={({ isActive }) =>
+                `font-semibold underline-offset-8 decoration-2 decoration-tangerine hover:underline ${isActive ? "underline" : ""}`
+              }
             >
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.4 5M7 13l-2 9m12-9l2 9M9 22a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              {count > 0 && (
-                <span className="absolute -top-1 -right-1 badge">{count}</span>
-              )}
+              Shop
+            </NavLink>
+
+            <button
+              onClick={toggleCart}
+              aria-label={ui.isCartOpen ? "Close cart" : `Open cart, ${count} items`}
+              className="inline-flex items-center gap-2 font-semibold underline-offset-8 decoration-2 decoration-tangerine hover:underline"
+            >
+              Cart
+              <span
+                className={`grid h-6 min-w-6 place-items-center rounded-full px-1.5 text-xs font-bold ${count > 0 ? "bg-lemon" : "bg-pith"}`}
+              >
+                {count}
+              </span>
             </button>
-            <Link to="/checkout" className="btn btn-brand hidden sm:inline-flex">
-              Checkout • ${totals.subtotal.toFixed(2)}
+
+            <Link to="/checkout" className="btn btn-primary hidden sm:inline-flex">
+              Checkout {count > 0 && currency(totals.subtotal)}
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
     </header>

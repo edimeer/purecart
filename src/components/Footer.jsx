@@ -1,39 +1,44 @@
 export default function Footer() {
+  const link = "hover:text-lemon hover:underline underline-offset-4";
+
   return (
-    <footer className="mt-16 border-t border-orange-100 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-10 grid sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+    <footer className="mt-24 bg-leaf text-paper">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 text-sm sm:grid-cols-2 md:grid-cols-4">
         <div>
-          <h3 className="font-semibold text-brand-700">PureCart</h3>
-          <p className="mt-2 text-gray-600">
-            A minimal, fast e-commerce starter in React + Tailwind.
-          </p>
+          <h3 className="font-display text-2xl font-extrabold">PureCart</h3>
+          <p className="mt-3 max-w-xs text-paper/80">Warm things for ordinary days.</p>
         </div>
         <div>
-          <h4 className="font-semibold text-gray-900">Company</h4>
-          <ul className="mt-2 space-y-2 text-gray-600">
-            <li><a className="hover:text-brand-700" href="#">About</a></li>
-            <li><a className="hover:text-brand-700" href="#">Careers</a></li>
-            <li><a className="hover:text-brand-700" href="#">Contact</a></li>
+          <h4 className="font-semibold text-lemon">Company</h4>
+          <ul className="mt-3 space-y-2">
+            <li><a className={link} href="#">About</a></li>
+            <li><a className={link} href="#">Careers</a></li>
+            <li><a className={link} href="#">Contact</a></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold text-gray-900">Help</h4>
-          <ul className="mt-2 space-y-2 text-gray-600">
-            <li><a className="hover:text-brand-700" href="#">Shipping</a></li>
-            <li><a className="hover:text-brand-700" href="#">Returns</a></li>
-            <li><a className="hover:text-brand-700" href="#">FAQ</a></li>
+          <h4 className="font-semibold text-lemon">Help</h4>
+          <ul className="mt-3 space-y-2">
+            <li><a className={link} href="#">Shipping</a></li>
+            <li><a className={link} href="#">Returns</a></li>
+            <li><a className={link} href="#">FAQ</a></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold text-gray-900">Newsletter</h4>
-          <form className="mt-2 flex gap-2">
-            <input className="input" placeholder="you@example.com" aria-label="Email" />
-            <button className="btn btn-brand">Subscribe</button>
+          <h4 className="font-semibold text-lemon">Newsletter</h4>
+          <form className="mt-3 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+            <input
+              className="field !border-paper/40 !bg-paper/10 !text-paper placeholder:!text-paper/60"
+              type="email"
+              placeholder="you@example.com"
+              aria-label="Email address"
+            />
+            <button className="btn bg-lemon text-leaf hover:bg-tangerine">Join</button>
           </form>
         </div>
       </div>
-      <div className="py-4 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} PureCart. All rights reserved.
+      <div className="border-t border-paper/15 py-5 text-center text-xs text-paper/70">
+        &copy; {new Date().getFullYear()} PureCart. All rights reserved.
       </div>
     </footer>
   );

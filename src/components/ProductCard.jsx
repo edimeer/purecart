@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../state/CartContext.jsx";
-import { currency } from "../utils/format.js";
+import Sticker from "./Sticker.jsx";
 
 export default function ProductCard({ product }) {
   const { add } = useCart();
 
   return (
-    <article className="card overflow-hidden group">
-      <Link to={`/product/${product.slug}`} className="block">
-        <div className="aspect-[4/3] bg-orange-100">
+    <article>
+      <Link to={`/product/${product.slug}`} className="group relative block">
+        <div className="aspect-[4/5] overflow-hidden rounded-sm bg-pith">
           <img
             src={product.image}
             alt={product.title}
@@ -16,24 +16,24 @@ export default function ProductCard({ product }) {
             loading="lazy"
           />
         </div>
-        <div className="p-4">
-          <h3 className="font-semibold text-gray-900">{product.title}</h3>
-          <p className="mt-1 text-sm text-gray-600">{product.category}</p>
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-brand-700 font-semibold">{currency(product.price)}</span>
-            {product.badge && <span className="badge">{product.badge}</span>}
-          </div>
-        </div>
+        <Sticker price={product.price} className="absolute -bottom-6 right-3" />
       </Link>
-      <div className="p-4 pt-0">
-        <button
-          onClick={() => add(product, 1)}
-          className="btn btn-brand w-full"
-          aria-label={`Add ${product.title} to cart`}
-        >
-          Add to Cart
-        </button>
+
+      <div className="mt-8 flex items-start justify-between gap-3 pr-1">
+        <div>
+          <h3 className="font-display text-xl font-extrabold leading-tight">{product.title}</h3>
+          <p className="mt-0.5 text-sm text-muted">{product.category}</p>
+        </div>
+        {product.badge && <span className="pill">{product.badge}</span>}
       </div>
+
+      <button
+        onClick={() => add(product, 1)}
+        className="btn btn-primary mt-4 w-full"
+        aria-label={`Add ${product.title} to cart`}
+      >
+        Add to cart
+      </button>
     </article>
   );
 }

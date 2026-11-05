@@ -1,5 +1,15 @@
+import { Link } from "react-router-dom";
 import { useCart } from "../state/CartContext.jsx";
 import { currency } from "../utils/format.js";
+
+function Field({ label, className = "", ...props }) {
+  return (
+    <label className={`block ${className}`}>
+      <span className="mb-1 block text-sm font-semibold">{label}</span>
+      <input className="field" required {...props} />
+    </label>
+  );
+}
 
 export default function Checkout() {
   const { items, totals, clear } = useCart();
@@ -10,52 +20,63 @@ export default function Checkout() {
     clear();
   };
 
+  if (items.length === 0) {
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-20">
+        <h1 className="font-display text-4xl font-extrabold">Your cart is empty.</h1>
+        <p className="mt-3 text-muted">Add something to check out.</p>
+        <Link to="/catalog" className="btn btn-primary mt-6">Browse the shop</Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 grid lg:grid-cols-3 gap-8">
+    <div className="mx-auto grid max-w-6xl gap-12 px-4 py-12 lg:grid-cols-3">
       <div className="lg:col-span-2">
-        <h1 className="text-2xl font-bold text-brand-700">Checkout</h1>
-        <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-          <section className="card p-4">
-            <h2 className="font-semibold text-gray-900">Shipping</h2>
-            <div className="mt-4 grid sm:grid-cols-2 gap-4">
-              <input className="input" placeholder="Full name" required />
-              <input className="input" placeholder="Phone" required />
-              <input className="input sm:col-span-2" placeholder="Address" required />
-              <input className="input" placeholder="City" required />
-              <input className="input" placeholder="Postal code" required />
+        <h1 className="font-display text-5xl font-extrabold tracking-tight">Checkout</h1>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-10">
+          <section className="border-t border-leaf/20 pt-5">
+            <h2 className="font-display text-2xl font-extrabold">Shipping</h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <Field label="Full name" autoComplete="name" />
+              <Field label="Phone" type="tel" autoComplete="tel" />
+              <Field label="Address" className="sm:col-span-2" autoComplete="street-address" />
+              <Field label="City" autoComplete="address-level2" />
+              <Field label="Postal code" autoComplete="postal-code" />
             </div>
           </section>
 
-          <section className="card p-4">
-            <h2 className="font-semibold text-gray-900">Payment</h2>
-            <div className="mt-4 grid sm:grid-cols-2 gap-4">
-              <input className="input sm:col-span-2" placeholder="Card number" required />
-              <input className="input" placeholder="MM/YY" required />
-              <input className="input" placeholder="CVC" required />
+          <section className="border-t border-leaf/20 pt-5">
+            <h2 className="font-display text-2xl font-extrabold">Payment</h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <Field label="Card number" className="sm:col-span-2" inputMode="numeric" autoComplete="cc-number" />
+              <Field label="Expiry (MM/YY)" autoComplete="cc-exp" />
+              <Field label="CVC" inputMode="numeric" autoComplete="cc-csc" />
             </div>
           </section>
 
-          <button className="btn btn-brand">Pay {currency(totals.total)}</button>
+          <button className="btn btn-primary px-8 py-3 text-lg">Pay {currency(totals.total)}</button>
         </form>
       </div>
 
-      <aside className="card p-4 h-fit">
-        <h2 className="font-semibold text-gray-900">Order Summary</h2>
-        <div className="mt-4 space-y-3">
+      <aside className="h-fit rounded-sm bg-pith p-6">
+        <h2 className="font-display text-2xl font-extrabold">Your order</h2>
+        <div className="mt-5 space-y-4">
           {items.map(it => (
-            <div key={it.id} className="flex justify-between gap-3 text-sm">
+            <div key={it.id} className="flex items-center gap-3 text-sm">
+              <img src={it.image} alt="" className="h-16 w-14 rounded-sm bg-paper object-cover" />
               <div className="flex-1">
-                <div className="font-medium">{it.title}</div>
-                <div className="text-gray-500">× {it.qty}</div>
+                <div className="font-semibold">{it.title}</div>
+                <div className="text-muted">Qty {it.qty}</div>
               </div>
-              <div className="font-semibold text-brand-700">{currency(it.price * it.qty)}</div>
+              <div className="font-semibold">{currency(it.price * it.qty)}</div>
             </div>
           ))}
         </div>
-        <div className="mt-4 border-t pt-4 space-y-1 text-sm">
+        <div className="mt-5 space-y-1.5 border-t border-leaf/20 pt-4 text-sm">
           <div className="flex justify-between"><span>Subtotal</span><span>{currency(totals.subtotal)}</span></div>
-          <div className="flex justify-between"><span>Shipping</span><span>{totals.subtotal > 100 ? "FREE" : currency(8)}</span></div>
-          <div className="flex justify-between font-semibold text-base"><span>Total</span><span>{currency(totals.total)}</span></div>
+          <div className="flex justify-between"><span>Shipping</span><span>{totals.subtotal > 100 ? "Free" : currency(8)}</span></div>
+          <div className="flex justify-between pt-2 font-display text-xl font-extrabold"><span>Total</span><span>{currency(totals.total)}</span></div>
         </div>
       </aside>
     </div>
